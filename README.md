@@ -36,9 +36,32 @@ I wrote the code for this project on my 1-year old MacBook Air (M1, 2020), 8 GB 
 | tidyr    | 1.2.0   | Wickham & Girlich, 2022        |
 
   ## 5. Empirical Results
-  
+  ### 5.1 Interactive plot with `Leaflet`
   
   
  ![](output/Rplot.png)
+ 
+ ## 6. Critical Evaluation
+ 
+ ## 7. Conclusion
+ 
+ 
+ ## References 
+ 
+ 
+ # B. Required Metadata
+ ## Table 1 - Software Metadata
+ 
+ 
+ ## Table 2 - Data Metadata
+ 
+ 
+ # Appendix I: Aggregated table of _LEI_ factors
+The table below show the description associated with each rank (0–5) for the four factors used by the Language Endangerment Index to assess the endangerment status of a language. The table is an aggregated form of tables 5.1–5.4 provided by Lee & Van Way (2018: 68, 69, 70).
+
+<img width="567" alt="Skærmbillede 2022-06-06 kl  17 01 19" src="https://user-images.githubusercontent.com/89093256/172187611-954b2148-54c4-4359-9633-f29c6fd12745.png">
+
+ 
+ 
  
  
