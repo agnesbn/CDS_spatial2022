@@ -1,0 +1,251 @@
+---
+title: "Hotspots of Endangered Languages"
+author: "Agnes Boel Nielsen"
+date: "2022-06-01 updated `r Sys.Date()`"
+output:
+    rmdformats::material:
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Initial tasks
+## Load useful packages
+We are going to be using a lot of different packages, so these have to be installed and loaded in first.
+```{r packages}
+pacman::p_load(dplyr, tidyr, stringr, readr, sf, leaflet, maptools, spatstat, terra, mapview)
+```
+
+
+## Geting the data
+The data files have to be downloaded from different sources and placed in the `data` folder. We will be using two different types of data:
+
+1. THE LANGUAGE DATA -- `database_file.csv`: Data on the status of endangered languages of the world. Contains information about number of speakers, country and continent it is spoken in, language family, and status of endangerment. It also includes a set of coordinates for each language which makes it possible to plot.
+    + Download the file from [The Endangered Language Database](https://www.endangeredlanguages.com/userquery/) and place in the `data` folder. The 
+2. THE BOUNDARIES DATA -- `world-administrative-boundaries.shp`: A shapefile with the boundaries of all the countries in the world.
+    + Download the file from [Open Data Soft](https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/). 
+    + Choose `Shapefile` on the website.
+    + Place the `world-administrative-boundaries` folder in the `data` folder.
+
+After downloading the necessary data, your repository structure should look something like this:
+
+📦CDS_spatial2022\
+ ┣ 📂data\
+ ┃ ┗ 📜database_file.csv\
+ ┃ ┗ 📂world_administrative-boundaries\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.dbf\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.prj\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.shp\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.shx\
+ ┣ 📂output\
+ ┣ 📜clean-up.R\
+ ┣ 📜final_project.html\
+ ┣ 📜final_project.Rmd\
+ ┗ 📜Spatial_proj_2022.Rproj\
+
+(This way of presenting a file tree was inspired by [this](https://stackoverflow.com/questions/19699059/representing-directory-file-structure-in-markdown-syntax) blog post)
+
+## Load the data into `R`
+Now that the data files are placed in the `data` folder, we can run the `clean-up.R` script, which saves a cleaned version of the language data.
+```{r run_clean-up, message=FALSE}
+# run clean-up script
+source("clean-up.R", local = knitr::knit_global())
+# summarise the endangerment categories
+table(df$endangeredness)
+```
+We can also read the `boundaries` data, which is a shapefile. It is imported as a simple feature object.
+```{r load-data}
+boundaries <- st_read("./data/world-administrative-boundaries/world-administrative-boundaries.shp")
+```
+
+# Data visualisation -- Interactive map with `Leaflet`
+The data is already pretty much in shape to plot it in an interactive map. All we have to do is create a colour palette which matches the endangerment categories.
+```{r colour_palette}
+# create colour list
+e_colours <- c("#ACB334", "#FAB733", "#FF8E15", "#FF4E11", "#FF0D0D", "#000000","#333333","#939799")
+
+# create labels vectors
+labels <- c("vulnerable", "threatened","endangered", "severely_endangered", "critically_endangered","dormant", "awakening", "at_risk")
+
+# make the labels into factors
+degrees <- factor((1:8), labels = labels, ordered = FALSE)
+
+# create palettes based on the factors
+pal <- colorFactor(e_colours, degrees, ordered = FALSE)
+```
+
+Now, we can plot the results in an interactive map using `Leaflet` with point for each language. The size of the points depend on the certainty of the data for each language (see the report for specification on what that means) and the colour corresponds to degree of endangerment. When hovering the cursor over a point the name of the given language is shown, and when a point is clicked, a window with various different information about that language is shown.
+```{r leaflet}
+mymap <- leaflet(options = leafletOptions()) %>% 
+  # add tiles
+  addTiles() %>% 
+  # add the Esri World Topographic Map
+  addProviderTiles("Esri.WorldTopoMap", group = "Topographic") %>% 
+  # add circle markers
+  addCircleMarkers(lng = df$longitude, # longitude
+                   lat = df$latitude, # latitude
+                   popup = df$popup, # popup - shown when point is clicked
+                   label = df$label, # label - shown when hovering over point
+                   stroke = FALSE, # no ring around the point
+                   fillOpacity = 0.5, # half opacity
+                   radius = df$certainty_radius, # radius depending on certainty
+                   color = pal(df$endangeredness)) %>% # colour depending on degree of endangerment
+  # add a legend  
+  addLegend("topright", # at the topright corner
+            pal=pal, # using the pre-defined colour palette
+            values = degrees, # using the endangerment categories
+            title="Degree of Endangerment") %>%  # add title
+  setView(lng=1, lat=35, zoom = 1.5) %>% 
+  leafem::addMouseCoordinates()
+  
+# save the map (you may have to uncomment the line below if you get an error message)
+# webshot::install_phantomjs()
+mapview::mapshot(mymap, file = "./output/Rplot.png")
+
+# plot the map
+mymap
+```
+
+
+As you can probably already get a feel of, there are areas where there are more endangered languages compared to other areas. Let's see if we can illustrate this a bit better using the `spatstat` package.
+
+# Point pattern analysis using `spatstat`
+To do point pattern analysis, we first have to convert our spatial objects into `spatstat` object. The language point data should be converted into a `ppp` object, a point pattern, and we can use the `boundaries` data as the window of observation.
+
+The first step is to get only the external boundaries of the `boundaries` data and to project it into a system usable for this kind of visualisation and mapping. I used `EPSG: 4088`.
+```{r observation_window}
+# get boundaries data in shape to use it as window
+polygon <- st_transform(boundaries, 4088)
+```
+
+
+Then we remove any potential empty polygons, convert it into a `SpatialPolygons` object, and create an `owin` (observation window) object from this. Finally, we plot the result.
+```{r}
+# create a spatial object
+polygonsp <- as(polygon, "Spatial")
+# create observation window
+ow <- as.owin(polygonsp, fatal = TRUE, hatch=TRUE)
+# plot the window
+par(mar=c(0, 0, 0, 0), xpd=TRUE)
+plot(ow, main=NULL)
+```
+
+
+Now, we can create the `ppp` object from the point data. We first subset it to only include the information, we are interested in here: the coordinates and the degree of endangerment. Then, we create a simple feature object from the coordinates and project it to the same system as the boundaries. Now, the `ppp` object can be created.
+```{r ppp}
+# subset the language data
+lang <- subset(df, select = c("longitude", "latitude", "endangeredness"))
+# create sf object from the dataframe
+  lang_st <- st_as_sf(lang, coords = c("longitude", "latitude"), crs=4326)
+# transform to the same projection as the world object
+lang_4088 <- st_transform(lang_st, 4088)
+# create ppp
+X <- as.ppp(lang_4088)
+# specify the unit name
+unitname(X) <- "m"
+# print summary
+summary(X)
+```
+
+
+The problem with this object is, that even though there are multiple markers (based on different degrees of endangerment), `R` does not recognise it as a multitype, which we can see if we run it through a `is.multitype()` check. Luckily, we can convert the marks into factors, which equally convert the `ppp` into a multitype object. To get the correct order, we also change the order of levels of marks.
+```{r as_multitype}
+# check whether the ppp is a multitype
+is.multitype(X) # [1] FALSE
+
+# convert marks into a factor to make the ppp a multitype object
+marks(X) <- factor(marks(X))
+# check again
+is.multitype(X) # [1] TRUE
+
+# reorder the levels
+levels(marks(X)) <- c("vulnerable", "threatened","endangered", "severely_endangered", "critically_endangered","dormant", "awakening", "at_risk")
+```
+
+Now we can put the two objects, the point pattern `X` and the observation window `ow`, together and plot the result.
+```{r join_ppp}
+# add the observation window
+Window(X) <- ow
+# plot
+par(mar=c(0, 4, 0, 0), xpd=TRUE)
+plot(X, main=NULL)
+```
+## Density plots
+To get a better overview of the distribution of the different categories on the map, we split the point pattern and create density objects for each category.
+The unit of this projection is [meters](https://epsg.io/4088). I change it to 10 km, so we can get some more readable density plots.
+```{r}
+X_10km <- rescale.ppp(X, 10000)
+```
+
+
+```{r split}
+cat1 <- split.ppp(X_10km)$vulnerable
+cat2 <- split.ppp(X_10km)$threatened
+cat3 <- split.ppp(X_10km)$endangered
+cat4 <- split.ppp(X_10km)$severely_endangered
+cat5 <- split.ppp(X_10km)$critically_endangered
+cat6 <- split.ppp(X_10km)$dormant
+cat7 <- split.ppp(X_10km)$awakening
+cat8 <- split.ppp(X_10km)$at_risk
+
+
+d1 <- density(cat1,sigma=80)
+d2 <- density(cat2,sigma=80)
+d3 <- density(cat3,sigma=80)
+d4 <- density(cat4,sigma=80)
+d5 <- density(cat5,sigma=80)
+d6 <- density(cat6,sigma=80)
+d7 <- density(cat7,sigma=80)
+d8 <- density(cat8,sigma=80)
+```
+
+The desities are plotted next to each other to compare.
+```{r plot densities}
+par(mfrow=c(4,2),mar=c(0, 0, 1, 0), xpd=TRUE)
+plot(d1, main="1. Vulnerable");contour(d1,add=TRUE, lwd=0.3)
+plot(d2, main="2. Threatened");contour(d2,add=TRUE,lwd=0.3)
+plot(d3, main="3. Endangered");contour(d3,add=TRUE,lwd=0.3)
+plot(d4, main="4. Severely endangered");contour(d4,add=TRUE, lwd=0.3)
+plot(d5, main="5. Critically endangered");contour(d5,add=TRUE,lwd=0.3)
+plot(d6, main="6. Dormant");contour(d6,add=TRUE,lwd=0.3)
+plot(d7, main="7. Awakening");contour(d7,add=TRUE,lwd=0.3)
+plot(d8, main="8. At risk");contour(d8, add=TRUE,lwd=0.3)
+```
+
+We can also plot them separately to get a better look at them.
+```{r}
+plot(d1, main="1. Vulnerable");contour(d1,add=TRUE,lwd=0.5)
+plot(d2, main="2. Threatened");contour(d2,add=TRUE,lwd=0.5)
+plot(d3, main="3. Endangered");contour(d3,add=TRUE,lwd=0.5)
+plot(d4, main="4. Severely endangered");contour(d4,add=TRUE,lwd=0.5)
+plot(d5, main="5. Critically endangered");contour(d5,add=TRUE,lwd=0.5)
+plot(d6, main="6. Dormant");contour(d6,add=TRUE,lwd=0.5)
+plot(d7, main="7. Awakening");contour(d7,add=TRUE,lwd=0.5)
+plot(d8, main="8. At risk");contour(d8, add=TRUE,lwd=0.5)
+```
+
+We can also combine some of the objects into larger groups. Here, I chose to make a group for the languages that are somehow considered threatened or endangered (so, `vulnerable`, `threatened`, `endangered`, `severely endangered`, and `critically endangered`), a group for those languages that have gone extinct (so, `dormant` and `awakening`), and a group for those languages that have not yet been classified as either safe or endangered (`at risk`):
+```{r}
+en <- superimpose(cat1,cat2,cat3,cat4,cat5)
+de <- superimpose(cat6, cat7)
+ar <- cat8
+
+e_dens <- density(en, sigma=80)
+d_dens <- density(de, sigma=80)
+a_dens <- density(ar, sigma=80)
+```
+
+```{r}
+par(mfrow=c(3,1),mar=c(0, 0, 1, 1.5), xpd=TRUE)
+plot(e_dens, main="Endangered");contour(e_dens, add=TRUE,lwd=0.5)
+plot(d_dens, main="Extinct");contour(d_dens, add=TRUE,lwd=0.5)
+plot(a_dens, main="Potentially at risk");contour(a_dens, add=TRUE,lwd=0.5)
+```
+
+
+
+
+
+
