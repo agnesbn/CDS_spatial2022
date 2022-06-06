@@ -65,8 +65,12 @@ I wrote the code for this project on my 1-year old MacBook Air (M1, 2020), 8 GB 
  
  
  ## References 
-Anderson, Gregory D. S. (2011). Language Hotspots: what (applied) linguistics and education should do about language endangerment in the twenty-first century. _Language and education_, 25(4), 273–289.\
-Andres (2021). Error loading a .shp file, using the function "as.owin". _Stack Overflow_. [blog] 3 May. Available at: https://stackoverflow.com/questions/67376532/error-loading-a-shp-file-using-the-function-as-owin [Accessed 5 June 2022].\
+Anderson, Gregory D. S. (2011). Language Hotspots: what (applied) linguistics and education should do about language endangerment in the twenty-first century. _Language and education_, 25(4), 273–289.
+
+
+Andres (2021). Error loading a .shp file, using the function "as.owin". _Stack Overflow_. [blog] 3 May. Available at: https://stackoverflow.com/questions/67376532/error-loading-a-shp-file-using-the-function-as-owin [Accessed 5 June 2022].
+
+
 Amano, Tatsuya, Brody Sandel, Heidi Eager, Edouard Bulteau, Jens-Christian Svenning, Bo Dalsgaard, Carsten Rahbek, Richard G. Davies & William J. Sutherland (2014). Global distribution and drivers of language extinction risk. _Proceedings. Biological sciences/The Royal Society_, 281(1793). https://doi.org/10.1098/rspb.2014.1574.\
 Appelhaus, Tim, Florian Detsch, Christoph Reudenbach & Stefan Woellauer (2022). _mapview: Interactive Viewing of Spatial Data in R_. [R package] Available at: https://github.com/r-spatial/mapview [Accessed 5 June 20222].\
 Baddeley, Adrian (2010). _Analysing spatial point patterns in R_. Workshop notes, version 4.1, December 2010. University of Western Australia. Available at: https://research.csiro.au/software/wp-content/uploads/sites/6/2015/02/Rspatialcourse_CMIS_PDF-Standard.pdf [Accessed 5 June 2022].\
