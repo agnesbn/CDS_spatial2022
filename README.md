@@ -16,7 +16,7 @@
  ┗ 📜[Spatial_proj_2022.Rproj](https://github.com/agnesbn/CDS_spatial2022/blob/main/Spatial_proj_2022.Rproj)\
 
 
-# __Hotspots of Endangered Languages__
+# __Report: Hotspots of Endangered Languages__
 __Agnes Boel Nielsen -- 201808193__
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__Abstract.__ ...
