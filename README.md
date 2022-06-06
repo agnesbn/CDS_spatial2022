@@ -1,20 +1,19 @@
-__Repository Structure__
+# Repository Structure
 
-📦CDS_spatial2022\
- ┣ 📂data\
+📦[CDS_spatial2022](https://github.com/agnesbn/CDS_spatial2022)\
+ ┣ 📂[data](https://github.com/agnesbn/CDS_spatial2022/tree/main/data)\
+ ┃  (these files will be uploaded on Digital Eksamen and should be added to the `data` folder)\
  ┃ ┗ 📜database_file.csv\
  ┃ ┗ 📂world_administrative-boundaries\
  ┃ ┃ ┗ 📜world_administrative-boundaries.dbf\
  ┃ ┃ ┗ 📜world_administrative-boundaries.prj\
  ┃ ┃ ┗ 📜world_administrative-boundaries.shp\
  ┃ ┃ ┗ 📜world_administrative-boundaries.shx\
- ┣ 📂output\
- ┣ 📜clean-up.R\
- ┣ 📜final_project.html\
- ┣ 📜final_project.Rmd\
- ┗ 📜Spatial_proj_2022.Rproj\
-
-
+ ┣ 📂[output](https://github.com/agnesbn/CDS_spatial2022/tree/main/output)\
+ ┣ 📜[clean-up.R](https://github.com/agnesbn/CDS_spatial2022/blob/main/clean-up.R)\
+ ┣ 📜[final_project.html](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.html)\
+ ┣ 📜[final_project.Rmd](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.Rmd)\
+ ┗ 📜[Spatial_proj_2022.Rproj](https://github.com/agnesbn/CDS_spatial2022/blob/main/Spatial_proj_2022.Rproj)\
 
 
 # __Hotspots of Endangered Languages__
