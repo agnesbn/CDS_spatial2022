@@ -1,3 +1,22 @@
+__Repository Structure__
+
+📦CDS_spatial2022\
+ ┣ 📂data\
+ ┃ ┗ 📜database_file.csv\
+ ┃ ┗ 📂world_administrative-boundaries\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.dbf\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.prj\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.shp\
+ ┃ ┃ ┗ 📜world_administrative-boundaries.shx\
+ ┣ 📂output\
+ ┣ 📜clean-up.R\
+ ┣ 📜final_project.html\
+ ┣ 📜final_project.Rmd\
+ ┗ 📜Spatial_proj_2022.Rproj\
+
+
+
+
 # __Hotspots of Endangered Languages__
 __Agnes Boel Nielsen -- 201808193__
 
