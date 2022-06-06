@@ -1,25 +1,25 @@
-# Hotspots of Endangered Languages
+# __Hotspots of Endangered Languages__
 __Agnes Boel Nielsen -- 201808193__
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__Abstract.__ ...
 
 __Keywords__: language endangerment; language revitalisation; language hotspots.
 
-## A. Free text
-### 1. Introduction and Goal
+# A. Free text
+## 1. Introduction and Goal
 
 
 
-### 2. Problems and Background
+## 2. Problems and Background
 
-#### 2.1 Language death and language hotspots
+### 2.1 Language death and language hotspots
 
-#### 2.2 The Language Endangerment Index
+### 2.2 The Language Endangerment Index
 
-### 3. Software Framework
+## 3. Software Framework
 I wrote the code for this project on my 1-year old MacBook Air (M1, 2020), 8 GB RAM, which runs macOS Monterey (12.4) operating system. I worked in the desktop version of R (4.1.1) and RStudio (2022.02.3).
 
-### 4. Data Acquisition and Processing
+## 4. Data Acquisition and Processing
 
 ..
 | Package  | Version | Reference                      |
@@ -35,3 +35,10 @@ I wrote the code for this project on my 1-year old MacBook Air (M1, 2020), 8 GB 
 | terra    | 1.5.21  | Hijmans, 2022                  |
 | tidyr    | 1.2.0   | Wickham & Girlich, 2022        |
 
+  ## 5. Empirical Results
+  
+  
+  
+ ![](output/Rplot.png)
+ 
+ 
