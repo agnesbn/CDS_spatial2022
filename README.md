@@ -2,12 +2,12 @@
 ## Repository Structure
 📦[`CDS_spatial2022`](https://github.com/agnesbn/CDS_spatial2022)\
  ┣ 📂[`data`](https://github.com/agnesbn/CDS_spatial2022/tree/main/data)\
- ┃ ┗ 📜`database_file.csv`\
- ┃ ┗ 📂`world_administrative-boundaries`\
- ┃ ┃ ┗ 📜`world_administrative-boundaries.dbf`\
- ┃ ┃ ┗ 📜`world_administrative-boundaries.prj`\
- ┃ ┃ ┗ 📜`world_administrative-boundaries.shp`\
- ┃ ┃ ┗ 📜`world_administrative-boundaries.shx`\
+ ┃ ┗ 📜[`database_file.csv`](https://github.com/agnesbn/CDS_spatial2022/blob/main/data/database_file.csv)\
+ ┃ ┗ 📂[`world_administrative-boundaries`](https://github.com/agnesbn/CDS_spatial2022/tree/main/data/world-administrative-boundaries)\
+ ┃ ┃ ┗ 📜[`world_administrative-boundaries.dbf`](https://github.com/agnesbn/CDS_spatial2022/blob/main/data/world-administrative-boundaries/world-administrative-boundaries.dbf)\
+ ┃ ┃ ┗ 📜[`world_administrative-boundaries.prj`](https://github.com/agnesbn/CDS_spatial2022/blob/main/data/world-administrative-boundaries/world-administrative-boundaries.prj)\
+ ┃ ┃ ┗ 📜[`world_administrative-boundaries.shp`](https://github.com/agnesbn/CDS_spatial2022/blob/main/data/world-administrative-boundaries/world-administrative-boundaries.shp)\
+ ┃ ┃ ┗ 📜[`world_administrative-boundaries.shx`](https://github.com/agnesbn/CDS_spatial2022/blob/main/data/world-administrative-boundaries/world-administrative-boundaries.shx)\
  ┣ 📂[`output`](https://github.com/agnesbn/CDS_spatial2022/tree/main/output)\
  ┣ 📜[`clean-up.R`](https://github.com/agnesbn/CDS_spatial2022/blob/main/clean-up.R) <-- __clean-up script__\
  ┣ 📜[`final_project.html`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.html)\
