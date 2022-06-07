@@ -2,7 +2,6 @@
 ## Repository Structure
 📦[`CDS_spatial2022`](https://github.com/agnesbn/CDS_spatial2022)\
  ┣ 📂[`data`](https://github.com/agnesbn/CDS_spatial2022/tree/main/data)\
- ┃  (these files will be uploaded on Digital Eksamen and should be added to the `data` folder)\
  ┃ ┗ 📜`database_file.csv`\
  ┃ ┗ 📂`world_administrative-boundaries`\
  ┃ ┃ ┗ 📜`world_administrative-boundaries.dbf`\
