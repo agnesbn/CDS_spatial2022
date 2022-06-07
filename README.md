@@ -9,9 +9,9 @@
  ┃ ┃ ┗ 📜`world_administrative-boundaries.shp`\
  ┃ ┃ ┗ 📜`world_administrative-boundaries.shx`\
  ┣ 📂[`output`](https://github.com/agnesbn/CDS_spatial2022/tree/main/output)\
- ┣ 📜[`clean-up.R`](https://github.com/agnesbn/CDS_spatial2022/blob/main/clean-up.R)\ <-- clean-up script
+ ┣ 📜[`clean-up.R`](https://github.com/agnesbn/CDS_spatial2022/blob/main/clean-up.R) <-- __clean-up script__\
  ┣ 📜[`final_project.html`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.html)\
- ┗ 📜[`final_project.Rmd`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.Rmd) <-- Main script
+ ┗ 📜[`final_project.Rmd`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.Rmd) <-- __main script__
 
 ## The data
 The primary data is the Endangered Languages Database, which is available to the public for free through this link: https://www.endangeredlanguages.com/userquery/. The dataset can be downloaded in CSV form by clicking the Download the database-button. The CSV file contains a row for each language with information about its degree of endangerment, its number of speakers, some alternative names and other relevant descriptions, and the location of the language. 
