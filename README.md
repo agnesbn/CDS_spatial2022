@@ -14,8 +14,9 @@
  ┗ 📜[`final_project.Rmd`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.Rmd) <-- __main script__
 
 ## The data
-The primary data is the Endangered Languages Database, which is available to the public for free through this link: https://www.endangeredlanguages.com/userquery/. The dataset can be downloaded in CSV form by clicking the Download the database-button. The CSV file contains a row for each language with information about its degree of endangerment, its number of speakers, some alternative names and other relevant descriptions, and the location of the language. 
-As the data points occur all over the world, an object for the boundaries of the countries and territories of the world is also needed. I found the World Administrative Boundaries - Countries and Territories at this link: https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/. The data contains a polygon for each country (or territory).
+The primary data is the __Endangered Languages Database__, which is available to the public for free through this link: https://www.endangeredlanguages.com/userquery/. The dataset can be downloaded in CSV form by clicking the _Download the database_-button. The CSV file contains a row for each language with information about its degree of endangerment, its number of speakers, some alternative names and other relevant descriptions, and the location of the language. 
+
+As the data points occur all over the world, an object for the boundaries of the countries and territories of the world is also needed. I found the __World Administrative Boundaries - Countries and Territories__ dataset at this link: https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/. The data contains a polygon for each country (or territory).
 
 ### Data references
 _Catalogue of Endangered Languages_ (2022). University of Hawaii at Manoa. Available at: http://www.endangeredlanguages.com [Accessed 6 June 2022].
