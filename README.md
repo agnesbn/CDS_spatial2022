@@ -13,6 +13,11 @@
  ┣ 📜[`final_project.html`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.html)\
  ┗ 📜[`final_project.Rmd`](https://github.com/agnesbn/CDS_spatial2022/blob/main/final_project.Rmd) <-- __main script__
 
+## Usage
+- Clone the code to your local system.
+- Set up an R project in the `CDS_spatial2022` folder.
+- Run the code chunks in `final_project.Rmd`.
+
 ## The data
 The primary data is the __Endangered Languages Database__, which is available to the public for free through this link: https://www.endangeredlanguages.com/userquery/. The dataset can be downloaded in CSV form by clicking the _Download the database_-button. The CSV file contains a row for each language with information about its degree of endangerment, its number of speakers, some alternative names and other relevant descriptions, and the location of the language. 
 
