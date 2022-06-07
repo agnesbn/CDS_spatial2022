@@ -22,9 +22,7 @@ As the data points occur all over the world, an object for the boundaries of the
 _Catalogue of Endangered Languages_ (2022). University of Hawaii at Manoa. Available at: http://www.endangeredlanguages.com [Accessed 6 June 2022].
 
 
-_World Administrative Boundaries – Countries and Territories_ (2019). World Food Programme (UN agency). Available at: https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/information/ [Accessed 6 June 2022].
-
-
+_World Administrative Boundaries – Countries and Territories_ (2019). World Food Programme (UN agency). Available at: https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/information/ [Accessed 6 June 2022].\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;License: [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
 ## Software Framework
